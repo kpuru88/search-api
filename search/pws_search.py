@@ -179,14 +179,14 @@ def format_output(result: dict, format_type: str = "pretty") -> str:
     
     # If output is structured JSON with our schema (multiple products)
     if isinstance(data, dict) and 'matched_products' in data:
-        output.append(f"\n🔍 Query: {data.get('query', 'N/A')}")
+        output.append(f"\nQuery: {data.get('query', 'N/A')}")
         
         products = data.get('matched_products', [])
-        output.append(f"📊 Found {len(products)} product(s)")
+        output.append(f"Found {len(products)} product(s)")
         output.append("\n" + "-" * 70)
         
         for idx, product in enumerate(products, 1):
-            output.append(f"\n✅ Product {idx}:")
+            output.append(f"  Product {idx}:")
             output.append(f"   Title:    {product.get('title', 'N/A')}")
             output.append(f"   ID:       {product.get('id', 'N/A')}")
             output.append(f"   Price:    {product.get('price', 'N/A')} {product.get('currency', '')}")
@@ -211,11 +211,11 @@ def main():
         description="Product search using Parallel AI Task API",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
-Examples:
-  %(prog)s --query "black couch"
-  %(prog)s --query "gaming laptop under $1500" --processor pro
-  %(prog)s -q "wireless headphones" --format json
-  %(prog)s -q "standing desk" --timeout 120
+            Examples:
+            %(prog)s --query "black couch"
+            %(prog)s --query "gaming laptop under $1500" --processor pro
+            %(prog)s -q "wireless headphones" --format json
+            %(prog)s -q "standing desk" --timeout 120
         """
     )
     
