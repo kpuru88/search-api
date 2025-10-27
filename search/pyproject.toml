@@ -1,0 +1,32 @@
+[project]
+name = "search"
+version = "2.0.0"
+description = "CLI search comparison tool for Parallel AI and Exa APIs"
+requires-python = ">=3.13"
+dependencies = [
+    "parallel-web>=0.3.2",
+    "exa-py>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "openai-agents>=0.4.2",
+    "pydantic>=2.12.3",
+    "ipykernel>=7.0.1",
+    "pandas>=2.3.3",
+    "openpyxl>=3.1.5",
+]
+
+[project.scripts]
+search = "search:main"
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+ignore = []
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true

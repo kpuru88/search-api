@@ -1,0 +1,343 @@
+{
+  "schema_version": "1.0",
+  "scoring": {
+    "scale_min": 1,
+    "scale_max": 5,
+    "aggregation": "weighted_average",
+    "weights": {
+      "criterion_1": 0.2,
+      "criterion_2": 0.2,
+      "criterion_3": 0.2,
+      "criterion_4": 0.2,
+      "criterion_5": 0.2
+    }
+  },
+  "rubrics": [
+    {
+      "query": "Black couch under 100",
+      "criteria": [
+        {
+          "id": "color_match",
+          "name": "Color Match (Blackness Accuracy)",
+          "definition": "Degree to which products are clearly black.",
+          "score_definitions": {
+            "5": "All results are clearly black.",
+            "4": "Most results are black; minor deviations (e.g., dark gray).",
+            "3": "Several results are off-color or unclear.",
+            "2": "Only one or two items are black.",
+            "1": "None are black or color not specified."
+          }
+        },
+        {
+          "id": "type_match",
+          "name": "Product Type Match (Couch Identification)",
+          "definition": "Whether items are couches/sofas/loveseats (not futons/chairs unless query implies).",
+          "score_definitions": {
+            "5": "All items are couches (sofa/loveseat acceptable).",
+            "4": "Mostly couches; one minor mismatch (e.g., futon).",
+            "3": "Mix of couches and unrelated seating.",
+            "2": "Few true couches.",
+            "1": "Mostly irrelevant products."
+          }
+        },
+        {
+          "id": "price_fit",
+          "name": "Price Constraint Fit (\u2264 $100)",
+          "definition": "Compliance with the $100 price ceiling.",
+          "score_definitions": {
+            "5": "All items are \u2264 $100.",
+            "4": "One item slightly over (\u2264 $110).",
+            "3": "Several items over but near the limit.",
+            "2": "Most items over $100.",
+            "1": "No items under $100.",
+            "0": "No prices listed"
+          }
+        },
+        {
+          "id": "combined_match",
+          "name": "Combined Attribute Match",
+          "definition": "Joint satisfaction of color + type + price.",
+          "score_definitions": {
+            "5": "Every product satisfies all three.",
+            "4": "Minor violations in a small subset.",
+            "3": "Multiple results miss at least one attribute.",
+            "2": "Only one or two items fully match.",
+            "1": "No item matches all conditions."
+          }
+        },
+        {
+          "id": "context_relevance",
+          "name": "Contextual Relevance",
+          "definition": "Alignment with budget black couches (e.g., appropriate retailers/sources).",
+          "score_definitions": {
+            "5": "Clearly tailored to affordable black couches.",
+            "4": "Generally relevant with minor drift.",
+            "3": "Some couch content but unfocused on budget/color.",
+            "2": "Weak contextual tie to query intent.",
+            "1": "Off-topic or misleading context."
+          }
+        }
+      ]
+    },
+    {
+      "query": "Wooden dining table for 6 people",
+      "criteria": [
+        {
+          "id": "material_match",
+          "name": "Material Match (Wood)",
+          "definition": "Degree to which products are wooden (not glass/metal).",
+          "score_definitions": {
+            "5": "All tables are wooden.",
+            "4": "Mostly wooden; a minor mixed-material item.",
+            "3": "Several mixed/unclear materials.",
+            "2": "Few wooden tables.",
+            "1": "None wooden or material unspecified."
+          }
+        },
+        {
+          "id": "type_match",
+          "name": "Product Type Match (Dining Table)",
+          "definition": "Whether items are dining tables (not desks/coffee tables).",
+          "score_definitions": {
+            "5": "All items are dining tables.",
+            "4": "Mostly dining tables; one minor mismatch.",
+            "3": "Mix of dining tables and other furniture.",
+            "2": "Few true dining tables.",
+            "1": "Mostly irrelevant items."
+          }
+        },
+        {
+          "id": "capacity_fit",
+          "name": "Capacity Accuracy (Seats 6)",
+          "definition": "Clear support for seating six (explicit or by dimensions).",
+          "score_definitions": {
+            "5": "All items clearly seat 6.",
+            "4": "Most seat 6; one unclear listing.",
+            "3": "Several unclear or wrong capacities.",
+            "2": "Few actually seat 6.",
+            "1": "None seat 6 or capacity not specified."
+          }
+        },
+        {
+          "id": "combined_match",
+          "name": "Combined Attribute Match",
+          "definition": "Joint satisfaction of wooden + dining table + seats 6.",
+          "score_definitions": {
+            "5": "Every item satisfies all three.",
+            "4": "Minor violations in a small subset.",
+            "3": "Multiple items miss an attribute.",
+            "2": "Only a few fully match.",
+            "1": "None fully match."
+          }
+        },
+        {
+          "id": "context_relevance",
+          "name": "Contextual Relevance",
+          "definition": "Alignment with family dining setups and appropriate retailers/categories.",
+          "score_definitions": {
+            "5": "Clearly focused on dining tables for 6.",
+            "4": "Generally relevant with minor drift.",
+            "3": "Generic furniture with limited focus on capacity.",
+            "2": "Weak connection to dining context.",
+            "1": "Off-topic."
+          }
+        }
+      ]
+    },
+    {
+      "query": "White sneakers size 9 under $80",
+      "criteria": [
+        {
+          "id": "color_match",
+          "name": "Color Match (White)",
+          "definition": "Degree to which sneakers are clearly white (not beige/gray).",
+          "score_definitions": {
+            "5": "All sneakers are white.",
+            "4": "Mostly white; minor off-white items.",
+            "3": "Several off-color or unclear.",
+            "2": "Few white items.",
+            "1": "None white or color not specified."
+          }
+        },
+        {
+          "id": "type_match",
+          "name": "Product Type Match (Sneakers)",
+          "definition": "Whether items are sneakers (not sandals/boots/dress shoes).",
+          "score_definitions": {
+            "5": "All items are sneakers.",
+            "4": "Mostly sneakers; one minor mismatch.",
+            "3": "Mix of sneakers and other footwear.",
+            "2": "Few actual sneakers.",
+            "1": "Mostly irrelevant items."
+          }
+        },
+        {
+          "id": "size_availability",
+          "name": "Size Availability (US 9)",
+          "definition": "Listings clearly include size 9 availability.",
+          "score_definitions": {
+            "5": "All listings include size 9.",
+            "4": "Most include size 9; one unclear.",
+            "3": "Several unclear or wrong sizes.",
+            "2": "Few have size 9.",
+            "1": "Size 9 unavailable or unspecified."
+          }
+        },
+        {
+          "id": "price_fit",
+          "name": "Price Constraint Fit (\u2264 $80)",
+          "definition": "Compliance with the $80 price ceiling.",
+          "score_definitions": {
+            "5": "All items are \u2264 $80.",
+            "4": "One item slightly over (\u2264 $90).",
+            "3": "Several over but near limit.",
+            "2": "Most over $80.",
+            "1": "No items under $80."
+          }
+        },
+        {
+          "id": "combined_match",
+          "name": "Combined Attribute Match",
+          "definition": "Joint satisfaction of color + type + size + price.",
+          "score_definitions": {
+            "5": "Every item satisfies all four.",
+            "4": "Minor violations in a small subset.",
+            "3": "Multiple items miss an attribute.",
+            "2": "Only a few fully match.",
+            "1": "None fully match."
+          }
+        }
+      ]
+    },
+    {
+      "query": "Silk dresses for summer wedding",
+      "criteria": [
+        {
+          "id": "material_match",
+          "name": "Material Match (Silk)",
+          "definition": "Degree to which items are silk or clearly silk-blend.",
+          "score_definitions": {
+            "5": "All dresses are silk/silk-blend.",
+            "4": "Mostly silk; one unclear/mixed.",
+            "3": "Several unclear or non-silk items.",
+            "2": "Few silk items.",
+            "1": "None silk or material not specified."
+          }
+        },
+        {
+          "id": "occasion_relevance",
+          "name": "Occasion Relevance (Wedding-Appropriate)",
+          "definition": "Suitability for a summer wedding (style, formality, color).",
+          "score_definitions": {
+            "5": "All dresses are clearly wedding-appropriate for summer.",
+            "4": "Mostly suitable; one borderline.",
+            "3": "Mixed suitability; several generic or evening-only.",
+            "2": "Few appropriate for summer weddings.",
+            "1": "Not suitable for the occasion."
+          }
+        },
+        {
+          "id": "type_match",
+          "name": "Product Type Match (Dress)",
+          "definition": "Whether items are dresses (not tops/skirts/accessories).",
+          "score_definitions": {
+            "5": "All items are dresses.",
+            "4": "Mostly dresses; one minor mismatch.",
+            "3": "Mix of dresses and other apparel.",
+            "2": "Few actual dresses.",
+            "1": "Mostly irrelevant items."
+          }
+        },
+        {
+          "id": "seasonal_context",
+          "name": "Seasonal Context (Summer)",
+          "definition": "Light, breathable, warm-weather designs.",
+          "score_definitions": {
+            "5": "All items clearly summer-appropriate.",
+            "4": "Mostly summer-ready; one unclear.",
+            "3": "Several unclear or mixed-season items.",
+            "2": "Few summer-ready items.",
+            "1": "Primarily non-summer attire."
+          }
+        },
+        {
+          "id": "combined_match",
+          "name": "Combined Attribute Match",
+          "definition": "Joint satisfaction of silk + dress + summer + wedding-appropriate.",
+          "score_definitions": {
+            "5": "Every item satisfies all four.",
+            "4": "Minor violations in a small subset.",
+            "3": "Multiple items miss an attribute.",
+            "2": "Only a few fully match.",
+            "1": "None fully match."
+          }
+        }
+      ]
+    },
+    {
+      "query": "Noise cancelling wireless headphones Sony",
+      "criteria": [
+        {
+          "id": "brand_match",
+          "name": "Brand Match (Sony)",
+          "definition": "Whether products are Sony-branded.",
+          "score_definitions": {
+            "5": "All items are Sony.",
+            "4": "Mostly Sony; one other brand included.",
+            "3": "Mixed brands across results.",
+            "2": "Few Sony items.",
+            "1": "None are Sony."
+          }
+        },
+        {
+          "id": "feature_match",
+          "name": "Feature Match (Noise Cancelling + Wireless)",
+          "definition": "Presence of both ANC and wireless capability.",
+          "score_definitions": {
+            "5": "All items clearly have ANC and wireless.",
+            "4": "Most have both; one unclear/missing.",
+            "3": "Several miss one feature.",
+            "2": "Most miss one/both features.",
+            "1": "None have both features."
+          }
+        },
+        {
+          "id": "type_match",
+          "name": "Product Type Match (Headphones)",
+          "definition": "Over/On-ear headphones focus (exclude speakers, etc.).",
+          "score_definitions": {
+            "5": "All items are headphones.",
+            "4": "Mostly headphones; one earbud/other device.",
+            "3": "Mix of headphones and other devices.",
+            "2": "Few headphones.",
+            "1": "Mostly irrelevant."
+          }
+        },
+        {
+          "id": "model_relevance",
+          "name": "Model Relevance",
+          "definition": "Alignment with Sony\u2019s ANC headphone line (e.g., WH-1000XM series) vs outdated/unrelated models.",
+          "score_definitions": {
+            "5": "All models are current or widely recognized ANC lines.",
+            "4": "Mostly current; one outdated/less relevant.",
+            "3": "Mixed current and outdated models.",
+            "2": "Mostly outdated/less relevant.",
+            "1": "Irrelevant models."
+          }
+        },
+        {
+          "id": "combined_match",
+          "name": "Combined Attribute Match",
+          "definition": "Joint satisfaction of Sony + ANC + wireless + headphone type.",
+          "score_definitions": {
+            "5": "Every item satisfies all four.",
+            "4": "Minor violations in a small subset.",
+            "3": "Multiple items miss an attribute.",
+            "2": "Only a few fully match.",
+            "1": "None fully match."
+          }
+        }
+      ]
+    }
+  ]
+}
