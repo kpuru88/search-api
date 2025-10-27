@@ -34,12 +34,8 @@ def run_search(
     client = Exa(api_key=exa_api_key)
     
     print(f"Searching for: {query}", file=sys.stderr)
-    print(f"Max results: {num_results}", file=sys.stderr)
-    print(f"Please wait...\n", file=sys.stderr)
     
     try:
-        # Perform search with Exa
-        print(f"Executing search...", file=sys.stderr)
         
         # Search with content extraction
         search_response = client.search_and_contents(
@@ -101,11 +97,6 @@ def format_output(result: dict, format_type: str = "pretty") -> str:
     output = []
     output.append("=" * 70)
     output.append("SEARCH RESULTS (EXA)")
-    output.append("=" * 70)
-    
-    output.append(f"\nQuery: {result.get('query', 'N/A')}")
-    output.append(f"Total Results: {result.get('total_results', 0)}")
-    output.append("\n" + "-" * 70)
     
     matched = result.get('matched_product')
     if matched:
@@ -119,14 +110,12 @@ def format_output(result: dict, format_type: str = "pretty") -> str:
             output.append(f"   Published: {matched.get('published_date')}")
         if matched.get('text'):
             output.append(f"\n   Preview:  {matched.get('text')[:200]}...")
-    else:
-        output.append("\n No results found")
     
     # Show all results summary
     all_results = result.get('all_results', [])
     if len(all_results) > 1:
         output.append("\n" + "-" * 70)
-        output.append("\n📋 All Results:")
+        output.append("\nAll Results:")
         for idx, res in enumerate(all_results[:5], 1):  # Show top 5
             output.append(f"\n   {idx}. {res.get('title', 'No title')}")
             output.append(f"      {res.get('url', 'No URL')}")
@@ -141,11 +130,11 @@ def main():
         description="Product search using Exa API",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
-Examples:
-  %(prog)s --query "black couch"
-  %(prog)s --query "gaming laptop under $1500" --num-results 20
-  %(prog)s -q "wireless headphones" --format json
-  %(prog)s -q "standing desk"
+            Examples:
+            %(prog)s --query "black couch"
+            %(prog)s --query "gaming laptop under $1500" --num-results 20
+            %(prog)s -q "wireless headphones" --format json
+            %(prog)s -q "standing desk"
         """
     )
     

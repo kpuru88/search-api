@@ -39,8 +39,6 @@ def run_search(
     client = Parallel(api_key=PARALLEL_API_KEY)
     
     print(f"Searching for: {query}", file=sys.stderr)
-    print(f"Processor: {processor}", file=sys.stderr)
-    print(f"Please wait...\n", file=sys.stderr)
     
     try:
         # 1. Create task run with structured output schema
@@ -96,7 +94,7 @@ def run_search(
         )
         
         run_id = task_run.run_id
-        print(f"✓ Task created: {run_id}", file=sys.stderr)
+        print(f"Task created: {run_id}", file=sys.stderr)
         
         # 2. Poll for completion
         elapsed = 0.0
@@ -171,9 +169,7 @@ def format_output(result: dict, format_type: str = "pretty") -> str:
     
     # Pretty format
     output = []
-    output.append("=" * 70)
-    output.append("SEARCH RESULTS")
-    output.append("=" * 70)
+    output.append("SEARCH RESULTS: PWS")
     
     data = result.get('output', {})
     
